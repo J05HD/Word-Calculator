@@ -9,6 +9,7 @@ Calculate the score for your word whilst playing scrabble with this helpful tool
   
 
 #### Features
+  - Vanilla JS
   - ES6+ Syntax
   - For Loops
   - Objects
