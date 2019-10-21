@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet">
+    <link href="https://unpkg.com/ionicons@4.4.7/dist/css/ionicons.min.css" rel="stylesheet">
+    <title>Scrabble Calculator | Developed By Joshua Dovey</title>
+</head>
+
+<body>
+
+    <div class="loading">
+        <p class="loading-text">
+            Loading
+        </p>
+    </div>
+    <section class="content">
+        <div class="row">
+            <div class="col-1-of-2">
+                <div class="content__text-box">
+                    <h1 class="heading__primary">
+                        Scrabble Calculator
+                    </h1>
+                </div>
+
+                <div class="form">
+                    <form action="#" method="post">
+                        <h2 class="heading--secondary" for="word">Insert Word</h2>
+
+                        <!-- Type Word -->
+                        <input type="text" id="word" class="input input--1">
+
+                        <!-- Bonus Points -->
+
+                        <h2 class="heading--secondary">Bonus Points</h2>
+
+
+                        <div class="bonus__group">
+
+                            <!-- Letter Bonus -->
+
+                            <!-- Double -->
+                            <div class="bonus__select-group">
+                                <label for="double-letter" class="label">Double Letter</label>
+                                <input type="text" id="double-letter" class="input input--2">
+                            </div>
+
+                            <div class="bonus__select-group">
+                                <!-- Triple -->
+                                <label for="triple-letter" class="label">Triple Letter</label>
+                                <input type="text" id="triple-letter" class="input input--2">
+                            </div>
+
+
+                            <div>
+                                &nbsp;
+                            </div>
+
+
+                            <!-- Word Bonus -->
+
+                            <!-- Double -->
+                            <div class="bonus__select-group">
+                                <input type="checkbox" class="bonus__checkbox" name="word-bonus" id="double-word">
+                                <label for="double-word" class="bonus__checkbox-toggle">
+                                    <i class="icon ion-md-checkmark bonus__checkbox-icon"></i>
+                                </label>
+                                <label class="bonus__select-label">Double Word</label>
+                            </div>
+
+                            <!-- TRIPLE -->
+                            <div class="bonus__select-group">
+                                <input type="checkbox" class="bonus__checkbox" name="word-bonus" id="triple-word">
+                                <label for="triple-word" class="bonus__checkbox-toggle">
+                                    <i class="icon ion-md-checkmark bonus__checkbox-icon"></i>
+                                </label>
+                                <label class="bonus__select-label">Triple Word</label>
+                            </div>
+
+
+                            <div class="bonus__bingo-group">
+                                <input type="checkbox" class="bonus__checkbox" name="word-bonus" id="bingo">
+                                <label for="bingo" class="bonus__checkbox-toggle">
+                                    <i class="icon ion-md-checkmark bonus__checkbox-icon"></i>
+                                </label>
+                                <label class="bonus__select-label">Bingo: All 7 tiles used 🎉</label>
+                            </div>
+                        </div>
+
+
+                        <!-- Submit Button -->
+                        <input type="button" id="submit-btn" class="btn" value="Calculate">
+                    </form>
+                </div>
+            </div>
+            <div class="col-1-of-2">
+                <div class="score">
+                    <h2 class="heading--secondary score-label">Your Score</h2>
+                    <span class="score-show" id="score">0</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</body>
+<script src="js/es6.js"></script>
+
+
+</html>
