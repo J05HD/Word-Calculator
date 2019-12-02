@@ -26,129 +26,65 @@ const letters = {
     Y: 4,
     Z: 10
 }
-
 const letterKeys = Object.keys(letters);
 const letterValues = Object.values(letters);
-const submitBtn = document.getElementById('submit-btn');
+let doubleLetterValue;
+let tripleLetterValue = document.getElementById('trible-letter')
+const doubleWordHtml = document.getElementById('double-word')
+const tripleWordHtml = document.getElementById('triple-word')
+const bingoHtml = document.getElementById('bingo')
+const btn = document.getElementById('submit-btn')
+let total;
 
-submitBtn.addEventListener('click', () => {
-    submitInfo();
+document.addEventListener('keydown', event => {
+    if (event.keyCode === 13 || event.which === 13) {
+        total = 0;
+        const input = document.querySelector('[data-input]').value.toUpperCase();
+        let inputArr = [...input];
+        calc(inputArr)
+    };
 });
 
+btn.addEventListener('click', () => {
+    total = 0;
+    const input = document.querySelector('[data-input]').value.toUpperCase();
+    let inputArr = [...input];
+    calc(inputArr)
+})
 
-const submitInfo = () => {
-    let total = 0;
-    let dL;
-    let tL;
-    const dLHTML = document.getElementById('double-word');
-    const tLHTML = document.getElementById('triple-word');
-    const bingoHTML = document.getElementById('bingo');
-    let score1;
-    let score2;
-    let score3;
-    let score4;
-    let score5;
-    let score6;
-    let score7;
-    let score8;
-    const w = document.getElementById('word').value.toUpperCase();
 
-    const calc = () => {
-        for (let i = 0; i < letterKeys.length; i++) {
-            if (w[0] == letterKeys[i]) {
-                score1 = letterValues[i];
-            };
-            if (w[1] == letterKeys[i]) {
-                score2 = letterValues[i];
-            };
-            if (w[2] == letterKeys[i]) {
-                score3 = letterValues[i];
-            };
-            if (w[3] == letterKeys[i]) {
-                score4 = letterValues[i];
-            };
-            if (w[4] == letterKeys[i]) {
-                score5 = letterValues[i];
-            };
-            if (w[5] == letterKeys[i]) {
-                score6 = letterValues[i];
-            };
-            if (w[6] == letterKeys[i]) {
-                score7 = letterValues[i];
-            };
-            if (w[7] == letterKeys[i]) {
-                score8 = letterValues[i];
-            };
-        }
-        const doubleLetter = () => {
-            dL = document.getElementById('double-letter').value.toUpperCase();
-            for (let i = 0; i < letterKeys.length; i++) {
-                if (dL === letterKeys[i]) {
-                    dL = letterValues[i];
-                    total = total - dL + dL * 2;
-                }
-            }
-        }
 
-        const tripleLetter = () => {
-            tL = document.getElementById('triple-letter').value.toUpperCase();
-            for (let i = 0; i < letterKeys.length; i++) {
-                if (tL === letterKeys[i]) {
-                    tL = letterValues[i];
-                    total = total - tL + tL * 3;
-                }
-            }
-        }
-
-        const doubleScore = () => {
-            if (dLHTML.checked == true) {
-                total *= 2;
-            };
-        }
-        const tripleScore = () => {
-            if (tLHTML.checked == true) {
-                total *= 3;
-            };
-        }
-        const bingo = () => {
-            if (w.length >= 7) {
-                if (bingoHTML.checked == true) {
-                    total = total + 50;
-                };
-            };
-        }
-
-        const callFunc = () => {
-            doubleLetter();
-            tripleLetter();
-            doubleScore();
-            tripleScore();
-            bingo();
-            document.getElementById('score').innerHTML = total;
-        }
-
-        if (w.length === 2) {
-            total = score1 + score2;
-            callFunc();
-        } else if (w.length === 3) {
-            total = score1 + score2 + score3;
-            callFunc();
-        } else if (w.length === 4) {
-            total = score1 + score2 + score3 + score4;
-            callFunc();
-        } else if (w.length === 5) {
-            total = score1 + score2 + score3 + score4 + score5;
-            callFunc();
-        } else if (w.length === 6) {
-            total = score1 + score2 + score3 + score4 + score5 + score6;
-            callFunc();
-        } else if (w.length === 7) {
-            total = score1 + score2 + score3 + score4 + score5 + score6 + score7;
-            callFunc();
-        } else if (w.length === 8) {
-            total = score1 + score2 + score3 + score4 + score5 + score6 + score7 + score8;
-            callFunc();
-        }
-    }
-    calc();
+function calc(args) {
+    for (let i = 0; i < args.length; i++) total += findValue(args[i]);
+    if (document.getElementById('double-letter').value !== "") doubleLetter()
+    if (document.getElementById('triple-letter').value !== "") tripleLetter()
+    if (doubleWordHtml.checked === true) doubleScore()
+    if (tripleWordHtml.checked === true) tripleScore()
+    if (args.length >= 7 && bingoHtml.checked === true) bingo()
+    document.getElementById('score').textContent = total
 }
+
+const findValue = letter => {
+    for (let i = 0; i < letterKeys.length; i++)
+        if (letter == letterKeys[i])
+            return letterValues[i]
+}
+
+const doubleLetter = () => {
+    doubleLetterValue = document.getElementById('double-letter').value.toUpperCase()
+    doubleLetterValue = findValue(doubleLetterValue) * 2
+    total += doubleLetterValue
+}
+
+const tripleLetter = () => {
+    tripleLetterValue = document.getElementById('triple-letter').value.toUpperCase()
+    tripleLetterValue = findValue(tripleLetterValue) * 3
+    total += tripleLetterValue
+}
+
+const doubleScore = () => total *= 2
+
+
+const tripleScore = () => total *= 3
+
+const bingo = () => total += 50
